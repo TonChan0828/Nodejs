@@ -1,17 +1,20 @@
 const http = require("http");
 const fs = require("fs");
+const ejs = require("ejs");
+
+const index_page = fs.readFileSync("./index.ejs", "utf8");
 
 var server = http.createServer(getFormClient);
 
 server.listen(3000);
 console.log("Server start!");
 
-function getFormClient(req, res) {
-  request = req;
-  response = res;
-  fs.readFile("./index.html", "UTF-8", (error, data) => {
-    response.writeHead(200, { "Content-Type": "text.html" });
-    response.write(data);
-    response.end();
+function getFormClient(request, response) {
+  var content = ejs.render(index_page, {
+    title: "Indexページ",
+    content: "これはテンプレートを使ったサンプルページです。",
   });
+  response.writeHead(200, { "Content-Type": "text.html" });
+  response.write(content);
+  response.end();
 }
