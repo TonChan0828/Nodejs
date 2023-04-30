@@ -61,7 +61,7 @@ function response_index(request, response) {
 
 // indexの表示作成
 function write_index(request, response) {
-  var msg = "米伝言を表示します。";
+  var msg = "※伝言を表示します。";
   var content = ejs.render(index_page, {
     title: "Index",
     content: msg,
