@@ -4,6 +4,7 @@ const ejs = require("ejs");
 const url = require("url");
 
 const index_page = fs.readFileSync("./index.ejs", "utf8");
+const other_page = fs.readFileSync("./other.ejs", "utf-8");
 const style_css = fs.readFileSync("./style.css", "utf-8");
 
 var server = http.createServer(getFormClient);
@@ -17,7 +18,17 @@ function getFormClient(request, response) {
     case "/":
       var content = ejs.render(index_page, {
         title: "Indexページ",
-        content: "これはテンプレートを使ったサンプルページです。",
+        content: "これはIndexページです。",
+      });
+      response.writeHead(200, { "Content-Type": "text.html" });
+      response.write(content);
+      response.end();
+      break;
+
+    case "/other":
+      var content = ejs.render(other_page, {
+        title: "Otherページ",
+        content: "これはOtherページです。",
       });
       response.writeHead(200, { "Content-Type": "text.html" });
       response.write(content);
