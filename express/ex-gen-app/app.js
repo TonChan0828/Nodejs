@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 var session_opt = {
   secret: "keyboard cat",
   resave: false,
-  saveInititialized: false,
+  saveUninitialized: false,
   cookie: { maxAge: 60 * 60 * 1000 },
 };
 
