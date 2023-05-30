@@ -51,6 +51,9 @@ router.post(
       .isEmail()
       .escape(),
     check("age", "AGEは年齢(整数)を入力してください。").isInt().escape(),
+    check("age", "AGEは0以上120以下で入力してください。").custom((value) => {
+      return value >= 0 && value <= 120;
+    }),
   ],
   (req, res, next) => {
     const errors = validationResult(req);
