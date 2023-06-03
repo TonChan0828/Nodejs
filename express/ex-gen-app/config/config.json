@@ -2,10 +2,10 @@
   "development": {
     "database":"db-development",
     "dialect": "sqlite",
-    "storage":"dv-dev.sqlite3"
+    "storage":"db-dev.sqlite3"
   },
   "test": {
-    "database":"deb-test",
+    "database":"db-test",
     "dialect":"sqlite",
     "storage":"dv-test.sqlite3"
   },
