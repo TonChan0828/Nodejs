@@ -50,22 +50,15 @@ router.get("/edit", (req, res, next) => {
 });
 
 router.post("/edit", (req, res, next) => {
-  db.sequelize
-    .sync()
-    .then(() =>
-      db.User.update(
-        {
-          name: req.body.name,
-          pass: req.body.pass,
-          mail: req.body.mail,
-          age: req.body.age,
-        },
-        { where: { id: req.body.id } }
-      )
-    )
-    .then((users) => {
+  db.User.findByPk(req.body.id).then((users) => {
+    users.name = req.body.name;
+    users.pass = req.body.pass;
+    users.mail = req.body.mail;
+    users.age = req.body.age;
+    users.save().then(() => {
       res.redirect("/users");
     });
+  });
 });
 
 module.exports = router;
