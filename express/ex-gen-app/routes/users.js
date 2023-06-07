@@ -61,4 +61,27 @@ router.post("/edit", (req, res, next) => {
   });
 });
 
+router.get("/delete", (req, res, next) => {
+  db.User.findByPk(req.query.id).then((users) => {
+    var data = {
+      title: "Users/Delete",
+      form: users,
+    };
+    res.render("users/delete", data);
+  });
+});
+
+router.post("/delete", (req, res, next) => {
+  db.sequelize
+    .sync()
+    .then(() =>
+      db.User.destroy({
+        where: { id: req.body.id },
+      })
+    )
+    .then((users) => {
+      res.redirect("/users");
+    });
+});
+
 module.exports = router;
