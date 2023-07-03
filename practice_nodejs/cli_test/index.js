@@ -2,6 +2,8 @@ const path = require("path");
 const fs = require("fs");
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
+const { getPackageName } = require("./lib/name");
+const { readMarkdownFileSync } = require("./lib/file");
 
 const { argv } = yargs(hideBin(process.argv))
   .option("name", { describe: "CLI名を表示" })
@@ -11,17 +13,10 @@ const { argv } = yargs(hideBin(process.argv))
 // console.log(argv);
 
 if (argv.name) {
-  const packageStr = fs.readFileSync(path.resolve(__dirname, "package.json"), {
-    encoding: "utf-8",
-  });
-  const package = JSON.parse(packageStr);
-  // nameオプションがな逝った場合は他のオプションを使わないで正常終了させる
-  console.log(package.name);
+  const name = getPackageName();
+  console.log(name);
   process.exit(0);
 }
 
-// 指定されたMarkdownファイルを読み込む
-const markdownStr = fs.readFileSync(path.resolve(__dirname, argv.file), {
-  encoding: "utf-8",
-});
+const markdownStr = readMarkdownFileSync(path.resolve(__dirname, argv.file));
 console.log(markdownStr);
