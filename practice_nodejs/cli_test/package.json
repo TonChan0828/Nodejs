@@ -13,5 +13,8 @@
   "dependencies": {
     "marked": "^5.1.0",
     "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0"
   }
 }
