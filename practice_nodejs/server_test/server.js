@@ -34,10 +34,10 @@ app.get("/user/:id", async (req, res) => {
 app.get("/users", async (req, res) => {
   const offset = req.query.offset ? Number(req.query.offset) : 0;
   const usersList = await redis.lrange("users:list", offset, offset + 1);
-
   const users = usersList.map((user) => {
     return JSON.parse(user);
   });
+  console.log(users);
   return { users: users };
 });
 
