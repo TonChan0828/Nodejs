@@ -3,6 +3,10 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+app.set("view engine", "ejs");
+
+app.use("/static", express.static(path.join(__dirname, "public")));
+
 const redis = new Redis({
   port: 6379,
   host: "localhost",
